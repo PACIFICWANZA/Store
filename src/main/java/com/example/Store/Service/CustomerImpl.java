@@ -52,4 +52,9 @@ public class CustomerImpl implements CustomerServiceI {
     public void deleteCustomer(Long customerNumber) {
         customerRepository.deleteById(customerNumber);
     }
+
+    @Override
+    public long countCustomers() {
+        return customerRepository.count();
+    }
 }

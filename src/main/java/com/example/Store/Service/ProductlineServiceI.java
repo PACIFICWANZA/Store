@@ -4,10 +4,13 @@ import com.example.Store.Modules.Productline;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ProductlineServiceI {
     Productline createProductline(Productline productline);
-    Productline getProductline(Long productLine);
+    List<Productline> getAllProductlines();
     Productline updateProductline(Long productLine, Productline productline);
     void deleteProductline(Long productLine);
+
 }

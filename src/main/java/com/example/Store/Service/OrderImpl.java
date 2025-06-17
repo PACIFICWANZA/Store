@@ -45,4 +45,8 @@ public class OrderImpl implements OrderServiceI{
         orderRepository.deleteById(orderNumber);
     }
 
+    public long countOrders() {
+        return orderRepository.count();
+    }
+
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/productline")
 @RequiredArgsConstructor
@@ -23,14 +25,12 @@ public class ProductlineController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-
-    @GetMapping("/viewProductLine/{productLine}")
-    public ResponseEntity<?> viewProductLine(@PathVariable Long productLine){
-        try{
-            Productline line = productlineServiceI.getProductline(productLine);
-            return ResponseEntity.ok(line);
+    @GetMapping("/viewProductLines")
+    public ResponseEntity<List<Productline>> getAllProductlines() {
+        try {
+            List<Productline> productlines = productlineServiceI.getAllProductlines();
+            return ResponseEntity.ok(productlines);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -53,5 +53,6 @@ public class ProductlineController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     }

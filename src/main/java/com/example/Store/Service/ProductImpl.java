@@ -5,6 +5,8 @@ import com.example.Store.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductImpl implements ProductServiceI{
@@ -15,11 +17,7 @@ public class ProductImpl implements ProductServiceI{
         return productRepository.save(product);
     }
 
-    @Override
-    public Product getProduct(Long productCode) {
-        return productRepository.findById(productCode)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-    }
+
 
     @Override
     public Product updateProduct(Long productCode, Product updatedProduct) {
@@ -40,5 +38,14 @@ public class ProductImpl implements ProductServiceI{
     public void deleteProduct(Long productCode) {
 
         productRepository.deleteById(productCode);
+    }
+
+    public long countProducts() {
+        return productRepository.count();
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OfficeImpl implements OfficeServiceI{
@@ -16,15 +18,12 @@ public class OfficeImpl implements OfficeServiceI{
         return officeRepository.save(office);
     }
 
-    @Override
-    public Office getOffice(Long officecode) {
-        return officeRepository.findById(officecode)
-                .orElseThrow(() -> new RuntimeException("Office not found"));
-    }
+
 
     @Override
    public Office updateOffice(Long officeCode, Office office) {
-        Office existingOffice = getOffice(officeCode);
+        Office existingOffice = officeRepository.findById(officeCode)
+            .orElseThrow(() -> new RuntimeException("Office not found with code: " + officeCode));
         existingOffice.setCity(office.getCity());
         existingOffice.setCountry(office.getCountry());
         existingOffice.setPhone(office.getPhone());
@@ -35,8 +34,15 @@ public class OfficeImpl implements OfficeServiceI{
         return officeRepository.save(existingOffice);
     }
 
+
+
     @Override
     public void deleteOffice(Long officeCode) {
         officeRepository.deleteById(officeCode);
+    }
+
+    @Override
+    public List<Office> getAllOffices() {
+        return officeRepository.findAll();
     }
 }

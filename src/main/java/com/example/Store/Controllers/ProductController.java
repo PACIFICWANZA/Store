@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -23,16 +25,17 @@ public class ProductController {
         }
 
     }
-    @GetMapping("/viewProduct/{productCode}")
-    public ResponseEntity<?> viewProduct(@PathVariable Long productCode){
-        try{
-            Product product = productServiceI.getProduct(productCode);
-            return ResponseEntity.ok(product);
+
+    @GetMapping("/viewProducts")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        try {
+            List<Product> products = productServiceI.getAllProducts();
+            return ResponseEntity.ok(products);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
     @PutMapping("/updateProduct/{productCode}")
     public ResponseEntity<?> updateProduct(@PathVariable Long productCode, @RequestBody Product product){
         try{
@@ -51,6 +54,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
 
 }

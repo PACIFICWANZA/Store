@@ -33,3 +33,4 @@ public class Payment {
     private BigDecimal amount;
 
 }
+

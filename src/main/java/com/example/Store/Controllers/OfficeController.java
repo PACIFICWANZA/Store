@@ -1,12 +1,13 @@
 package com.example.Store.Controllers;
 
 import com.example.Store.Modules.Office;
-import com.example.Store.Modules.Product;
 import com.example.Store.Service.OfficeServiceI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/office")
@@ -21,16 +22,16 @@ public class OfficeController {
         return ResponseEntity.ok(("Office created successfully"));
     }
 
-    @GetMapping("/viewOffice/{officeCode}")
-    public ResponseEntity<?> viewOffice(@PathVariable Long officeCode) {
+    @GetMapping("/viewOffices")
+    public ResponseEntity<List<Office>> getAllOffices() {
         try {
-            Office office = officeServiceI.getOffice(officeCode);
-            return ResponseEntity.ok(office);
+            List<Office> offices = officeServiceI.getAllOffices();
+            return ResponseEntity.ok(offices);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
     @PutMapping("/updateOffice/{officeCode}")
     public ResponseEntity<?> updateOffice(@PathVariable Long officeCode, @RequestBody Office office) {
         try {
@@ -40,6 +41,7 @@ public class OfficeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
     @DeleteMapping("/deleteOffice/{officeCode}")
     public ResponseEntity<Void> deleteOffice(@PathVariable Long officeCode) {
         try {
@@ -49,4 +51,6 @@ public class OfficeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
 }
