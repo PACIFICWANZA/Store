@@ -28,20 +28,11 @@ public class Product {
 
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_line_id", referencedColumnName = "productLine")
-    @JsonIgnore
     private Productline productLine;
 
-    @JsonProperty("productLineFromId")
-    private void setProductLineFromId(Long productLine) {
-        if (this.productLine == null) {
-            this.productLine = new Productline();
 
-        }
-        this.productLine.setProductLine(productLine);
-
-    }
 
     @Column
     @NotBlank(message = "No null entries")

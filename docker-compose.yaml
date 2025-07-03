@@ -1,0 +1,14 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "2000:8080"
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
