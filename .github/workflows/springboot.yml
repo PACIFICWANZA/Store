@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -49,4 +49,5 @@ jobs:
         run: |
           IMAGE="pacificwanza/my-springboot-app"
           docker build -t $IMAGE:${{ github.run_id }} .
+          docker push $IMAGE:${{ github.run_id }}
 
