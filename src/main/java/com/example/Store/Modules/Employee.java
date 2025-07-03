@@ -31,7 +31,7 @@ public class Employee {
     private String firstName;
 
     @Column
-    @Size(max = 10, message = "Do not exceed 10 characters")
+    @Size(max = 20, message = "Do not exceed 20 characters")
     @NotBlank(message = "No null entries")
     private String extension;
 
